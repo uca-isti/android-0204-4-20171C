@@ -5,10 +5,17 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+<<<<<<< HEAD
 
     <!--drawer menu-->
     <!--Inicio-->
     <string name="Navigation_drawer_home">Inicio</string>
     <string name="Navigation_home">Sitios naturales</string>
 
+=======
+    //drawe menu
+
+    <string name="Home">Inicio</string>
+    <string name="Enjoy">Entretenimiento</string>
+>>>>>>> 6e1ed92774e18a67ada2ec734eb330b6206338c0
 </resources>
