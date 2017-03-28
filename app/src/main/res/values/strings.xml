@@ -5,4 +5,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!--drawer menu-->
+    <!--Inicio-->
+    <string name="Navigation_drawer_home">Inicio</string>
+    <string name="Navigation_home">Sitios naturales</string>
+
 </resources>
