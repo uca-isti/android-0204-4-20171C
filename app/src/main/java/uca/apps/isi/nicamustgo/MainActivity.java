@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +17,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import uca.apps.isi.nicamustgo.api.Api;
+import uca.apps.isi.nicamustgo.api.ApiInterface;
 import uca.apps.isi.nicamustgo.fragments.CentrosCulturalesFragment;
 import uca.apps.isi.nicamustgo.fragments.ConfigFragment;
 import uca.apps.isi.nicamustgo.fragments.EntretenimientoFragment;
@@ -24,11 +34,12 @@ import uca.apps.isi.nicamustgo.fragments.HomeFragment;
 import uca.apps.isi.nicamustgo.fragments.NosFragment;
 import uca.apps.isi.nicamustgo.fragments.ServiciosFragment;
 import uca.apps.isi.nicamustgo.fragments.SitiosNaturalesFragment;
+import uca.apps.isi.nicamustgo.models.Categoria;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+        private final static String TAG ="MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +53,48 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+
+
             }
         });
+
+        //xf{gl
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.getBase())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiInterface apiInterface=retrofit.create(ApiInterface.class);
+
+                /*Categoria categoria = new Categoria();
+                categoria.setNombre("Hospedaje2");
+                Call<Categoria> categoriaCall=ApiInterface.createCategoria(categoria)*/
+
+        //Call<List<Categoria>> call = ApiInterface.getCategorias();
+        Call<List<Categoria>> call = Api.instance().getCategorias();
+        call.enqueue(new Callback<List<Categoria>>() {
+            @Override
+            public void onResponse(Call<List<Categoria>> call, Response<List<Categoria>> response) {
+                if(response!=null)
+                {
+                    for(Categoria categoria:response.body())
+                    {
+                        Log.i(TAG,categoria.getNombre());
+                    }
+                }
+                else
+                {
+                    Log.i(TAG,"response es nulo");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Categoria>> call, Throwable t) {
+                Log.i(TAG,t.getMessage());
+            }
+        });
+        //sdjfoisj
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
