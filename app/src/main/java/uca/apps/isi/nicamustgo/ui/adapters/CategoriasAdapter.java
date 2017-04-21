@@ -1,4 +1,4 @@
-package uca.apps.isi.nicamustgo.ui.adapters;
+/*package uca.apps.isi.nicamustgo.ui.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView;
@@ -9,11 +9,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import uca.apps.isi.nicamustgo.R;
 import uca.apps.isi.nicamustgo.models.Categoria;
 
-/**
- * Created by isi3 on 17/4/2017.
- */
 
 public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.ViewHolder>  {
     private List<Categoria> placeModels;
@@ -26,7 +24,6 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Vi
         public TextView name;
         public ViewHolder(View view) {
             super(view);
-            name = (TextView) view.findViewById(R.id.name);
         }
     }
 
@@ -67,3 +64,4 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Vi
         return placeModels.size();
     }
 }
+*/
