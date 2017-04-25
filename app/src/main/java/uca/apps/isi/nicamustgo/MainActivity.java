@@ -19,6 +19,7 @@ import android.view.MenuItem;
 
 import java.util.List;
 
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity
                 {
                     for(Categoria categoria:response.body())
                     {
+                        addItem(categoria);
                         Log.i(TAG,categoria.getNombre());
                     }
                 }
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity
                 Log.i(TAG,t.getMessage());
             }
         });
+
         //sdjfoisj
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -105,7 +108,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+private void addItem(Categoria categoriaItem) {
+    Realm realm =Realm.getDefaultInstance();
+    realm.beginTransaction();
+    Categoria categoria =realm.createObject(Categoria.class);
+    categoria.setNombre(categoriaItem.getNombre());
 
+    realm.commitTransaction();
+}
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
